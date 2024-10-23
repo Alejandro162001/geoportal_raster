@@ -15,16 +15,22 @@
     <!-- Selector con preview de capas base -->
     <div class="layer-switcher">
         <div class="layer-option active" data-layer="osm">
-            <img src="https://a.tile.openstreetmap.org/4/2/3.png" alt="OpenStreetMap">
-            <span>OpenStreetMap</span>
+            <div class="layer-preview">
+                <img src="https://a.tile.openstreetmap.org/4/2/3.png" alt="OpenStreetMap">
+                <span class="layer-label">OpenStreetMap</span> <!-- Clase para el texto -->
+            </div>
         </div>
         <div class="layer-option" data-layer="esri">
-            <img src="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/4/2/3" alt="Esri Satellite">
-            <span>Satellite</span>
+            <div class="layer-preview">
+                <img src="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/4/2/3" alt="Esri Satellite">
+                <span class="layer-label">Satellite</span> <!-- Clase para el texto -->
+            </div>
         </div>
         <div class="layer-option" data-layer="cartodb">
-            <img src="https://cartodb-basemaps-a.global.ssl.fastly.net/rastertiles/voyager/4/2/3.png" alt="CartoDB">
-            <span>Carto</span>
+            <div class="layer-preview">
+                <img src="https://cartodb-basemaps-a.global.ssl.fastly.net/rastertiles/voyager/4/2/3.png" alt="CartoDB">
+                <span class="layer-label">Carto</span> <!-- Clase para el texto -->
+            </div>
         </div>
     </div>
 
@@ -32,7 +38,7 @@
         // Crear capas base
         const osmLayer = new ol.layer.Tile({
             source: new ol.source.OSM(),
-            visible: true, // Visible por defecto
+            visible: false, // Visible por defecto
             title: 'osm'
         });
 
@@ -40,7 +46,7 @@
             source: new ol.source.XYZ({
                 url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
             }),
-            visible: false,
+            visible: true,
             title: 'esri'
         });
 
@@ -51,14 +57,14 @@
             visible: false,
             title: 'cartodb'
         });
-
+        
         // Crear el mapa y agregar las capas
         const map = new ol.Map({
             target: 'map',
             layers: [osmLayer, esriLayer, cartoLayer], // Añadir todas las capas
             view: new ol.View({
-                center: ol.proj.fromLonLat([-98.35, 39.50]), // Centro en EE.UU.
-                zoom: 4
+                center: ol.proj.fromLonLat([-86.000, 14.0818]), //coordenadas hn
+                zoom: 7.5
             })
         });
 
